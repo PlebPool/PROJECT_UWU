@@ -1,3 +1,0 @@
-C:/Users/matti/Desktop/git/PROJECT_UWU/not_sus/cmake-build-debug/CMakeFiles/uwu_mode.dir
-C:/Users/matti/Desktop/git/PROJECT_UWU/not_sus/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/matti/Desktop/git/PROJECT_UWU/not_sus/cmake-build-debug/CMakeFiles/rebuild_cache.dir
