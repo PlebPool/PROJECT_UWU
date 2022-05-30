@@ -26,7 +26,7 @@ namespace uwuHook
 }
 
 LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
-{
+{ // TODO Streamline logical flow with one or two exit "points". (SendInput) or (return CallNextHookEx)
     if (wParam == WM_KEYDOWN && nCode == HC_ACTION)
     {
         auto keyValue = (PKBDLLHOOKSTRUCT)lParam;
