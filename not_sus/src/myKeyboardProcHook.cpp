@@ -11,6 +11,9 @@ const unsigned short ENTER_KEY = 0x0D;
 const unsigned short SPACE_KEY = 0x20;
 DWORD lastInput;
 
+DWORD toBePrintedByNext;
+bool skipToBePrintedBtNext = false;
+
 namespace uwuHook
 {
     HHOOK keyboardHook;
@@ -24,7 +27,7 @@ namespace uwuHook
 
 LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
-    if (wParam == WM_KEYDOWN && nCode == HC_ACTION)
+    if (wParam == WM_KEYDOWN && nCode == HC_ACTION && !skipNext)
     {
         auto keyValue = (PKBDLLHOOKSTRUCT)lParam;
         if ((char)keyValue->vkCode == 'R' || (char)keyValue->vkCode == 'L')
@@ -32,16 +35,16 @@ LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
             SendInput(1, &wInput, sizeof(INPUT));
             return -1;
         }
-        if ((char)keyValue->vkCode == 'O')
-        {
-            if ((!lastTime || clock() - lastTime >= 0.5*CLOCKS_PER_SEC) && lastInput != 'O' && lastInput != 'C')
-            {
-                lastTime = clock();
-                INPUT inputs[] = {oInput, wInput};
-                SendInput(2, &inputs[0], sizeof(INPUT));
-                return -1;
-            }
-        }
+//        if ((char)keyValue->vkCode == 'O') // TODO look into toBePrintedByNext.
+//        {
+//            if ((!lastTime || clock() - lastTime >= 0.5*CLOCKS_PER_SEC) && lastInput != 'O' && lastInput != 'C')
+//            {
+//                lastTime = clock();
+//                INPUT inputs[] = {oInput, wInput};
+//                SendInput(2, &inputs[0], sizeof(INPUT));
+//                return -1;
+//            }
+//        }
         if ((!lastTime || clock() - lastTime >= 0.5*CLOCKS_PER_SEC) && keyValue->vkCode == ENTER_KEY)
         {
             lastTime = clock();
