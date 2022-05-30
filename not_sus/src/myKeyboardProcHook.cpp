@@ -11,7 +11,7 @@ const unsigned short ENTER_KEY = 0x0D;
 const unsigned short SPACE_KEY = 0x20;
 DWORD lastInput;
 
-DWORD toBePrintedByNext;
+DWORD toBePrintedByNext; // Maybe rename to "trailingW"
 bool skipToBePrintedBtNext = false;
 
 namespace uwuHook
@@ -27,7 +27,7 @@ namespace uwuHook
 
 LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
-    if (wParam == WM_KEYDOWN && nCode == HC_ACTION && !skipNext)
+    if (wParam == WM_KEYDOWN && nCode == HC_ACTION)
     {
         auto keyValue = (PKBDLLHOOKSTRUCT)lParam;
         if ((char)keyValue->vkCode == 'R' || (char)keyValue->vkCode == 'L')
