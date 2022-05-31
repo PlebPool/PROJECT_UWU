@@ -2,7 +2,7 @@
 // Created by matti on 2022-05-30.
 //
 
-#include "../headers/myKeyboardProcHook.h"
+#include "../headers/nMyKeyboardProcHook.h"
 
 const unsigned short W_KEY = 0x57;
 const unsigned short O_KEY = 0x4F;
@@ -14,7 +14,7 @@ DWORD lastInput;
 constexpr int FLOAT_MIN = 0;
 constexpr int FLOAT_MAX = 1;
 
-namespace uwuHook
+namespace UwuHook
 { // TODO Move these variables out of namespace into this source file.
     HHOOK keyboardHook;
     INPUT wInput{.type = INPUT_KEYBOARD, .ki = {W_KEY}};
@@ -25,7 +25,7 @@ namespace uwuHook
     clock_t lastTime;
 }
 // TODO put a lot of this code in another namespace, separate from this hook one.
-LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK UwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
 { // TODO Streamline logical flow with one or two exit "points". (SendInput) or (return CallNextHookEx)
     if (wParam == WM_KEYDOWN && nCode == HC_ACTION)
     {
@@ -69,6 +69,10 @@ LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
             SendInput(size, &inputs[0], sizeof(INPUT));
             delete [] inputs;
             return -1;
+        }
+        if ((char)keyValue->vkCode == 'Y')
+        {
+            // TODO double y.
         }
 //        if (lastTime == SPACE_KEY)
 //        { // TODO random number for stutter. No b-bitches?

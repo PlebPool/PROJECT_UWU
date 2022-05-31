@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 20)
 set(GCC_FLAGS "-static")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_FLAGS}")
 
-add_executable(${PROJECT_NAME} main.cpp src/myKeyboardProcHook.cpp headers/myKeyboardProcHook.h)
+add_executable(${PROJECT_NAME} main.cpp src/nMyKeyboardProcHook.cpp headers/nMyKeyboardProcHook.h src/nUwuProcessor.cpp headers/nUwuProcessor.h)
