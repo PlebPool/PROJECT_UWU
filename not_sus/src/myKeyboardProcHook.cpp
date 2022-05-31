@@ -11,8 +11,8 @@ const unsigned short ENTER_KEY = 0x0D;
 const unsigned short SPACE_KEY = 0x20;
 DWORD lastInput;
 
-DWORD toBePrintedByNext; // Maybe rename to "trailingW"
-bool skipToBePrintedBtNext = false;
+constexpr int FLOAT_MIN = 0;
+constexpr int FLOAT_MAX = 1;
 
 namespace uwuHook
 {
@@ -35,16 +35,23 @@ LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
             SendInput(1, &wInput, sizeof(INPUT));
             return -1;
         }
-//        if ((char)keyValue->vkCode == 'O') // TODO look into toBePrintedByNext.
-//        {
-//            if ((!lastTime || clock() - lastTime >= 0.5*CLOCKS_PER_SEC) && lastInput != 'O' && lastInput != 'C')
-//            {
-//                lastTime = clock();
-//                INPUT inputs[] = {oInput, wInput};
-//                SendInput(2, &inputs[0], sizeof(INPUT));
-//                return -1;
-//            }
-//        }
+        if ((char)keyValue->vkCode == 'O')
+        {
+            if ((!lastTime || clock() - lastTime >= 0.5*CLOCKS_PER_SEC)
+                && lastInput != 'O'
+                && lastInput != 'C'
+                && lastInput != 'Y'
+                && lastInput != 'W'
+                && lastInput != 'S'
+                && lastInput != 'M'
+                && lastInput != 'T')
+            {
+                lastTime = clock();
+                INPUT inputs[] = {oInput, wInput};
+                SendInput(2, &inputs[0], sizeof(INPUT));
+                return -1;
+            }
+        }
         if ((!lastTime || clock() - lastTime >= 0.5*CLOCKS_PER_SEC) && keyValue->vkCode == ENTER_KEY)
         {
             lastTime = clock();
@@ -62,6 +69,14 @@ LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
             SendInput(size, &inputs[0], sizeof(INPUT));
             delete [] inputs;
             return -1;
+        }
+        if (lastTime == SPACE_KEY)
+        { // TODO random number for stutter. No b-bitches?
+            std::random_device rd;
+            std::default_random_engine eng(rd());
+            std::uniform_real_distribution<float> dist(FLOAT_MIN, FLOAT_MAX);
+            dist(eng);
+
         }
         lastInput = keyValue->vkCode;
     }

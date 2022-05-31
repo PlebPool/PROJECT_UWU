@@ -8,6 +8,7 @@
 #include <windows.h>
 #include <winuser.h>
 #include <ctime>
+#include <random>
 
 namespace uwuHook
 {
