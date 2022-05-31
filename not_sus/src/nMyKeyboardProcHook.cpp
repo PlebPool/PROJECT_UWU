@@ -60,23 +60,6 @@ LRESULT CALLBACK UwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
                 inputsV.clear();
                 inputsV.push_back(wInput);
                 break;
-//            case O_KEY: // O
-//                if ((!coolDown || clock() - coolDown >= 0.5 * CLOCKS_PER_SEC)
-//                    && previousInput != 'O'
-//                    && previousInput != 'C'
-//                    && previousInput != 'Y'
-//                    && previousInput != 'W'
-//                    && previousInput != 'S'
-//                    && previousInput != 'M'
-//                    && previousInput != 'T')
-//                {
-//                    bModify = true;
-//                    coolDown = clock();
-//                    inputSize = 2;
-//                    inputsV.clear();
-//                    inputsV.insert(inputsV.end(), {oInput, wInput});
-//                }
-//                break;
             case ENTER_KEY: // ENTER
                 if (bOffCoolDown())
                 {
