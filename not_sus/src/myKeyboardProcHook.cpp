@@ -15,7 +15,7 @@ constexpr int FLOAT_MIN = 0;
 constexpr int FLOAT_MAX = 1;
 
 namespace uwuHook
-{
+{ // TODO Move these variables out of namespace into this source file.
     HHOOK keyboardHook;
     INPUT wInput{.type = INPUT_KEYBOARD, .ki = {W_KEY}};
     INPUT oInput{.type = INPUT_KEYBOARD, .ki = {O_KEY}};
