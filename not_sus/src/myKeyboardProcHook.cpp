@@ -24,7 +24,7 @@ namespace uwuHook
     INPUT spaceInput{.type = INPUT_KEYBOARD, .ki = {SPACE_KEY}};
     clock_t lastTime;
 }
-
+// TODO put a lot of this code in another namespace, separate from this hook one.
 LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
 { // TODO Streamline logical flow with one or two exit "points". (SendInput) or (return CallNextHookEx)
     if (wParam == WM_KEYDOWN && nCode == HC_ACTION)
