@@ -70,14 +70,13 @@ LRESULT CALLBACK uwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
             delete [] inputs;
             return -1;
         }
-        if (lastTime == SPACE_KEY)
-        { // TODO random number for stutter. No b-bitches?
-            std::random_device rd;
-            std::default_random_engine eng(rd());
-            std::uniform_real_distribution<float> dist(FLOAT_MIN, FLOAT_MAX);
-            dist(eng);
-
-        }
+//        if (lastTime == SPACE_KEY)
+//        { // TODO random number for stutter. No b-bitches?
+//            std::random_device rd;
+//            std::default_random_engine eng(rd());
+//            std::uniform_real_distribution<float> dist(FLOAT_MIN, FLOAT_MAX);
+//            dist(eng);
+//        }
         lastInput = keyValue->vkCode;
     }
     return CallNextHookEx(keyboardHook, nCode, wParam, lParam);
