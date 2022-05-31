@@ -13,10 +13,6 @@
 namespace UwuHook
 {
     extern HHOOK keyboardHook;
-    extern INPUT wInput;
-    extern INPUT oInput;
-    extern INPUT enterInput;
-    extern clock_t lastTime;
     extern LRESULT CALLBACK keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam);
 }
 

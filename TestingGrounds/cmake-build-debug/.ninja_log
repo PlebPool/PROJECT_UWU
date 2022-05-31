@@ -1,0 +1,19 @@
+# ninja log v5
+0	374	6757274231748050	CMakeFiles/TestingGrounds.dir/main.cpp.obj	bb74eb3868a54eb3
+376	450	6757274232507432	TestingGrounds.exe	e67b1380b58de28b
+2	403	6757274583558951	CMakeFiles/TestingGrounds.dir/main.cpp.obj	bb74eb3868a54eb3
+403	482	6757274584328761	TestingGrounds.exe	e67b1380b58de28b
+2	348	6757275633023151	CMakeFiles/TestingGrounds.dir/main.cpp.obj	bb74eb3868a54eb3
+349	413	6757275633653145	TestingGrounds.exe	e67b1380b58de28b
+2	318	6757275790813857	CMakeFiles/TestingGrounds.dir/main.cpp.obj	bb74eb3868a54eb3
+318	378	6757275791383854	TestingGrounds.exe	e67b1380b58de28b
+2	339	6757275983685381	CMakeFiles/TestingGrounds.dir/main.cpp.obj	bb74eb3868a54eb3
+339	400	6757275984285381	TestingGrounds.exe	e67b1380b58de28b
+2	334	6757276328585503	CMakeFiles/TestingGrounds.dir/main.cpp.obj	bb74eb3868a54eb3
+335	403	6757276329245499	TestingGrounds.exe	e67b1380b58de28b
+1	325	6757276506877137	CMakeFiles/TestingGrounds.dir/main.cpp.obj	bb74eb3868a54eb3
+325	386	6757276507467140	TestingGrounds.exe	e67b1380b58de28b
+2	325	6757279349820127	CMakeFiles/TestingGrounds.dir/main.cpp.obj	bb74eb3868a54eb3
+325	387	6757279350424485	TestingGrounds.exe	e67b1380b58de28b
+2	331	6757285773153086	CMakeFiles/TestingGrounds.dir/main.cpp.obj	bb74eb3868a54eb3
+331	393	6757285773753416	TestingGrounds.exe	e67b1380b58de28b
