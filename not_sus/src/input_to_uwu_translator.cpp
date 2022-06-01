@@ -16,6 +16,7 @@ const DWORD R_KEY = 0x52;
 const DWORD L_KEY = 0x4C;
 const DWORD HYPHEN_KEY = 0xBD;
 
+/* It's defining the inputs that will be used in the program. */
 INPUT wInput{.type = INPUT_KEYBOARD, .ki{W_KEY}};
 INPUT oInput{.type = INPUT_KEYBOARD, .ki{O_KEY}};
 INPUT uInput{.type = INPUT_KEYBOARD, .ki{U_KEY}};
@@ -28,11 +29,19 @@ clock_t coolDown = '\0';
 
 DWORD previousInput;
 
+/**
+ * It resets the coolDown variable to the current time
+ */
 void resetCoolDown()
 {
     coolDown = clock();
 }
 
+/**
+ * If the cooldown is off, return true, otherwise return false
+ *
+ * @return A boolean value.
+ */
 bool bOffCoolDown()
 {
     if (coolDown == '\0')
@@ -45,6 +54,18 @@ bool bOffCoolDown()
     }
 }
 
+/**
+ * "If the cooldown is over, insert the uwu sequence into the vector and return true, otherwise return false."
+ *
+ * The first thing the function does is check if the cooldown is over. If it is, it resets the cooldown and then checks if
+ * the previous input was the space key. If it was, it inserts the uwu sequence without the space key. If it wasn't, it
+ * inserts the uwu sequence with the space key
+ *
+ * @param dest The vector to insert the inputs into.
+ * @param clearVectorBefore If true, the vector will be cleared before inserting the inputs.
+ *
+ * @return A boolean value.
+ */
 bool insertUwu(std::vector<INPUT> &dest, bool clearVectorBefore)
 {
     if (clearVectorBefore) dest.clear();
@@ -64,6 +85,15 @@ bool insertUwu(std::vector<INPUT> &dest, bool clearVectorBefore)
     return false;
 }
 
+/**
+ * If the cooldown is off, reset it and insert the input twice into the vector, then return true. Otherwise, return false.
+ *
+ * @param dest The vector to insert the input into.
+ * @param input The input you want to insert.
+ * @param clearVectorBefore If true, the vector will be cleared before the input is inserted.
+ *
+ * @return A boolean value.
+ */
 bool insertTwice(std::vector<INPUT> &dest, INPUT &input, bool clearVectorBefore)
 {
     if (bOffCoolDown())
@@ -76,6 +106,15 @@ bool insertTwice(std::vector<INPUT> &dest, INPUT &input, bool clearVectorBefore)
     return false;
 }
 
+
+/**
+ * Flow control for uwu translation
+ *
+ * @param dest The vector of INPUTs that will be sent to the keyboard.
+ * @param virtualKeyCode The virtual key code of the key that was pressed.
+ *
+ * @return A boolean value.
+ */
 bool keySwapper(std::vector<INPUT> &dest, DWORD &virtualKeyCode)
 {
     switch (virtualKeyCode)
@@ -97,12 +136,19 @@ bool keySwapper(std::vector<INPUT> &dest, DWORD &virtualKeyCode)
     return false;
 }
 
+/**
+ * If the previous input was a space, there's a 20% chance that the current input will be stuttered
+ *
+ *
+ * @param dest The vector that will be modified.
+ * @param virtualKeyCode The virtual key code of the key that was pressed.
+ *
+ * @return A boolean value signalling if the content of the vector has been changed or not.
+ */
 bool input_to_uwu_translator::getUwuOutputArray(std::vector<INPUT> &dest, DWORD virtualKeyCode)
 {
     bool isModified;
-
     isModified = keySwapper(dest, virtualKeyCode);
-
     if (previousInput == SPACE_KEY && virtualKeyCode != SPACE_KEY)
     {
         std::random_device device;
@@ -122,11 +168,9 @@ bool input_to_uwu_translator::getUwuOutputArray(std::vector<INPUT> &dest, DWORD 
             previousInput = '\0'; // To avoid looping.
         }
     }
-
     if (!isModified)
     {
         previousInput = virtualKeyCode;
     }
-
     return isModified;
 }

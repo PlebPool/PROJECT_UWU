@@ -6,9 +6,6 @@
 #define UWU_MODE_UWU_KEYBOARD_HOOK_H
 
 #include <windows.h>
-#include <winuser.h>
-#include <ctime>
-#include <random>
 
 namespace uwu_keyboard_hook
 {
