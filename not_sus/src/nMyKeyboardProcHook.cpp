@@ -4,12 +4,11 @@
 
 #include "../headers/nMyKeyboardProcHook.h"
 
-
-
 namespace UwuHook
 {
     HHOOK keyboardHook;
 }
+
 // TODO put a lot of this code in another namespace, separate from this hook one.
 LRESULT CALLBACK UwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
 { // TODO Streamline logical flow with one or two exit "points". (SendInput) or (return CallNextHookEx)
