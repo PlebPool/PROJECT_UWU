@@ -1,3 +1,0 @@
-C:/Users/matti/Desktop/git/PROJECT_UWU/TestingGrounds/cmake-build-debug/CMakeFiles/TestingGrounds.dir
-C:/Users/matti/Desktop/git/PROJECT_UWU/TestingGrounds/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/matti/Desktop/git/PROJECT_UWU/TestingGrounds/cmake-build-debug/CMakeFiles/rebuild_cache.dir
