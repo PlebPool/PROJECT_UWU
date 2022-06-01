@@ -2,19 +2,19 @@
 // Created by matti on 2022-05-30.
 //
 
-#ifndef UWU_MODE_NMYKEYBOARDPROCHOOK_H
-#define UWU_MODE_NMYKEYBOARDPROCHOOK_H
+#ifndef UWU_MODE_UWU_KEYBOARD_HOOK_H
+#define UWU_MODE_UWU_KEYBOARD_HOOK_H
 
 #include <windows.h>
 #include <winuser.h>
 #include <ctime>
 #include <random>
 
-namespace UwuHook
+namespace uwu_keyboard_hook
 {
     extern HHOOK keyboardHook;
     extern LRESULT CALLBACK keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam);
 }
 
 
-#endif //UWU_MODE_NMYKEYBOARDPROCHOOK_H
+#endif //UWU_MODE_UWU_KEYBOARD_HOOK_H

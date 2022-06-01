@@ -2,15 +2,15 @@
 // Created by matti on 2022-05-30.
 //
 
-#include "../headers/nMyKeyboardProcHook.h"
-#include "../headers/nUwuProcessor.h"
+#include "../headers/uwu_keyboard_hook.h"
+#include "../headers/input_to_uwu_translator.h"
 
-namespace UwuHook
+namespace uwu_keyboard_hook
 {
     HHOOK keyboardHook;
 }
 
-LRESULT CALLBACK UwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK uwu_keyboard_hook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
     if (wParam == WM_KEYDOWN && nCode == HC_ACTION)
     {
@@ -19,7 +19,7 @@ LRESULT CALLBACK UwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
 
         auto keyValue = (PKBDLLHOOKSTRUCT)lParam;
 
-        bModify = InputToUwuTranslator::getUwuOutputArray(inputsV, keyValue->vkCode);
+        bModify = input_to_uwu_translator::getUwuOutputArray(inputsV, keyValue->vkCode);
 
         if (bModify)
         {

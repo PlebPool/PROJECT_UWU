@@ -3,7 +3,7 @@
 //
 
 #include <ctime>
-#include "../headers/nUwuProcessor.h"
+#include "../headers/input_to_uwu_translator.h"
 #include <random>
 
 const DWORD W_KEY = 0x57;
@@ -97,7 +97,7 @@ bool keySwapper(std::vector<INPUT> &dest, DWORD &virtualKeyCode)
     return false;
 }
 
-bool InputToUwuTranslator::getUwuOutputArray(std::vector<INPUT> &dest, DWORD virtualKeyCode)
+bool input_to_uwu_translator::getUwuOutputArray(std::vector<INPUT> &dest, DWORD virtualKeyCode)
 {
     bool isModified;
 
