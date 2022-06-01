@@ -6,11 +6,11 @@
 #define UWU_MODE_NUWUPROCESSOR_H
 
 #include <vector>
-#include <winuser.h>
+#include "nMyKeyboardProcHook.h"
 
-namespace nUwuProcessor
+namespace InputToUwuTranslator
 {
-    int getUwuOutputArray(std::vector<INPUT> &dest, DWORD virtualKeyCode);
+    bool getUwuOutputArray(std::vector<INPUT> &dest, DWORD virtualKeyCode);
 }
 
 #endif //UWU_MODE_NUWUPROCESSOR_H

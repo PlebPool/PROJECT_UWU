@@ -24,7 +24,7 @@ INPUT spaceInput{.type = INPUT_KEYBOARD, .ki{SPACE_KEY}};
 INPUT yInput{.type = INPUT_KEYBOARD, .ki{Y_KEY}}; // Y
 INPUT hyphenInput{.type = INPUT_KEYBOARD, .ki{HYPHEN_KEY}};
 
-clock_t coolDown;
+clock_t coolDown = '\0';
 
 DWORD previousInput;
 
@@ -35,53 +35,73 @@ void resetCoolDown()
 
 bool bOffCoolDown()
 {
-    return !coolDown || clock() - coolDown >= 0.5 * CLOCKS_PER_SEC;
-}
-
-void insertUwu(std::vector<INPUT> &dest, bool clearVectorBefore)
-{
-    if (clearVectorBefore) dest.clear();
-    if (previousInput != SPACE_KEY)
+    if (coolDown == '\0')
     {
-        dest.insert(dest.end(), {spaceInput, uInput, wInput, uInput, enterInput});
+        return true;
     }
     else
     {
-        dest.insert(dest.end(), {uInput, wInput, uInput, enterInput});
+        return clock() - coolDown >= 0.5 * CLOCKS_PER_SEC;
     }
 }
 
-void insertTwice(std::vector<INPUT> &dest, INPUT &input, bool clearVectorBefore)
+bool insertUwu(std::vector<INPUT> &dest, bool clearVectorBefore)
 {
     if (clearVectorBefore) dest.clear();
-    dest.insert(dest.end(), {input, input});
+    if (bOffCoolDown())
+    {
+        resetCoolDown();
+        if (previousInput != SPACE_KEY)
+        {
+            dest.insert(dest.end(), {spaceInput, uInput, wInput, uInput, enterInput});
+        }
+        else
+        {
+            dest.insert(dest.end(), {uInput, wInput, uInput, enterInput});
+        }
+        return true;
+    }
+    return false;
 }
 
-int nUwuProcessor::getUwuOutputArray(std::vector<INPUT> &dest, DWORD virtualKeyCode)
+bool insertTwice(std::vector<INPUT> &dest, INPUT &input, bool clearVectorBefore)
 {
-    bool isModified = false;
+    if (bOffCoolDown())
+    {
+        resetCoolDown();
+        if (clearVectorBefore) dest.clear();
+        dest.insert(dest.end(), {input, input});
+        return true;
+    }
+    return false;
+}
+
+bool keySwapper(std::vector<INPUT> &dest, DWORD &virtualKeyCode)
+{
     switch (virtualKeyCode)
     {
         case R_KEY: case L_KEY:
-            isModified = true;
             dest.clear();
             dest.push_back(wInput);
-            return 0;
+            return true;
         case ENTER_KEY:
-            isModified = true;
             if (previousInput != ENTER_KEY)
             {
-                insertUwu(dest, true);
+                return insertUwu(dest, true);
             }
-            return 0;
         case Y_KEY:
-            isModified = true;
-            insertTwice(dest, yInput, true);
-            previousInput = '\0'; // To avoid looping.
-            return 0;
+            return insertTwice(dest, yInput, true);
         default:
             break;
     }
+    return false;
+}
+
+bool InputToUwuTranslator::getUwuOutputArray(std::vector<INPUT> &dest, DWORD virtualKeyCode)
+{
+    bool isModified;
+
+    isModified = keySwapper(dest, virtualKeyCode);
 
     if (previousInput == SPACE_KEY && virtualKeyCode != SPACE_KEY)
     {
@@ -90,9 +110,23 @@ int nUwuProcessor::getUwuOutputArray(std::vector<INPUT> &dest, DWORD virtualKeyC
         std::uniform_real_distribution<float> distribution(0, 1);
         if (distribution(engine) > 0.80)
         {
+            isModified = true;
             std::vector<INPUT> stutterVector;
-            // TODO WIP
+            INPUT dynamicInput{.type = INPUT_KEYBOARD, .ki{static_cast<WORD>(virtualKeyCode)}};
+            stutterVector.insert(stutterVector.end(),
+                                 {dynamicInput,
+                                  hyphenInput,
+                                  dynamicInput}
+                                 );
+            dest.insert(dest.begin(), stutterVector.begin(), stutterVector.end());
             previousInput = '\0'; // To avoid looping.
         }
     }
+
+    if (!isModified)
+    {
+        previousInput = virtualKeyCode;
+    }
+
+    return isModified;
 }
