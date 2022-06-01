@@ -4,36 +4,7 @@
 
 #include "../headers/nMyKeyboardProcHook.h"
 
-const DWORD W_KEY = 0x57;
-const DWORD O_KEY = 0x4F;
-const DWORD U_KEY = 0x55;
-const DWORD ENTER_KEY = 0x0D;
-const DWORD SPACE_KEY = 0x20;
-const DWORD Y_KEY = 0x59;
-const DWORD R_KEY = 0x52;
-const DWORD L_KEY = 0x4C;
-const DWORD HYPHEN_KEY = 0xBD;
 
-DWORD previousInput;
-
-INPUT wInput{.type = INPUT_KEYBOARD, .ki{W_KEY}};
-INPUT oInput{.type = INPUT_KEYBOARD, .ki{O_KEY}};
-INPUT uInput{.type = INPUT_KEYBOARD, .ki{U_KEY}};
-INPUT enterInput{.type = INPUT_KEYBOARD, .ki{ENTER_KEY}};
-INPUT spaceInput{.type = INPUT_KEYBOARD, .ki{SPACE_KEY}};
-INPUT yInput{.type = INPUT_KEYBOARD, .ki{Y_KEY}}; // Y
-INPUT hyphenInput{.type = INPUT_KEYBOARD, .ki{HYPHEN_KEY}};
-clock_t coolDown;
-
-void resetCoolDown()
-{
-    coolDown = clock();
-}
-
-bool bOffCoolDown()
-{
-    return !coolDown || clock() - coolDown >= 0.5 * CLOCKS_PER_SEC;
-}
 
 namespace UwuHook
 {
@@ -54,41 +25,41 @@ LRESULT CALLBACK UwuHook::keyBoardProc(int nCode, WPARAM wParam, LPARAM lParam)
 
         switch ((DWORD)keyValue->vkCode)
         {
-            case R_KEY: case L_KEY: // R, L
-                bModify = true;
-                inputSize = 1;
-                inputsV.clear();
-                inputsV.push_back(wInput);
-                break;
-            case ENTER_KEY: // ENTER
-                if (bOffCoolDown())
-                {
-                    bDontStutter = true;
-                    bModify = true;
-                    resetCoolDown();
-                    if (previousInput != SPACE_KEY)
-                    { // TODO make these two arrays static, to avoid creating and deleting these arrays everytime.
-                        inputSize = 5;
-                        inputsV.clear();
-                        inputsV.insert(inputsV.end(), {spaceInput, uInput, wInput, uInput, enterInput});
-                    } else
-                    {
-                        inputSize = 4;
-                        inputsV.clear();
-                        inputsV.insert(inputsV.end(), {uInput, wInput, uInput, enterInput});
-                    }
-                }
-                break;
-            case Y_KEY: // Y
-                if (bOffCoolDown())
-                {
-                    resetCoolDown();
-                    bModify = true;
-                    inputSize = 2;
-                    inputsV.clear();
-                    inputsV.insert(inputsV.end(), {yInput, yInput});
-                }
-                break;
+//            case R_KEY: case L_KEY: // R, L
+//                bModify = true;
+//                inputSize = 1;
+//                inputsV.clear();
+//                inputsV.push_back(wInput);
+//                break;
+//            case ENTER_KEY: // ENTER
+//                if (bOffCoolDown())
+//                {
+//                    bDontStutter = true;
+//                    bModify = true;
+//                    resetCoolDown();
+//                    if (previousInput != SPACE_KEY)
+//                    { // TODO make these two arrays static, to avoid creating and deleting these arrays everytime.
+//                        inputSize = 5;
+//                        inputsV.clear();
+//                        inputsV.insert(inputsV.end(), {spaceInput, uInput, wInput, uInput, enterInput});
+//                    } else
+//                    {
+//                        inputSize = 4;
+//                        inputsV.clear();
+//                        inputsV.insert(inputsV.end(), {uInput, wInput, uInput, enterInput});
+//                    }
+//                }
+//                break;
+//            case Y_KEY: // Y
+//                if (bOffCoolDown())
+//                {
+//                    resetCoolDown();
+//                    bModify = true;
+//                    inputSize = 2;
+//                    inputsV.clear();
+//                    inputsV.insert(inputsV.end(), {yInput, yInput});
+//                }
+//                break;
         }
         if (!bDontStutter)
         {
